@@ -2,7 +2,7 @@ Project Name :Customer Churn Prediction
 
 This project uses machine learning to predict whether a customer is likely to leave a service (churn). It helps businesses identify high-risk customers and take proactive actions to retain them.
 
-* Features:
+*Features:
 1.Preprocessing of real-world customer data
 2.Handling class imbalance using SMOTE
 3.Multiple classification models (Logistic Regression, Decision Tree, Neural Network)
