@@ -3,7 +3,7 @@ import pandas as pd
 
 st.title("Customer Churn Prediction System")
 
-df = pd.read_csv("WA_Fn-UseC_-Telco-Customer-Churn.csv")
+df = pd.read_csv("Telco_Customer_Churn.csv")
 
 st.subheader("Dataset Preview")
 st.write(df.head())
