@@ -19,7 +19,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("📊 Customer Churn Prediction Dashboard")
+st.title("Customer Churn Prediction Dashboard")
 
 # ==========================
 # FILE UPLOAD
@@ -404,6 +404,7 @@ st.subheader(
 prob = mlp.predict_proba(
     X_test
 )[:, 1]
+
 
 report_df = pd.DataFrame(
     {
