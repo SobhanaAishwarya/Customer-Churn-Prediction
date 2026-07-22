@@ -376,6 +376,113 @@ X_resampled, y_resampled = smote.fit_resample(
 )
 
 # ==========================
+# CLASS DISTRIBUTION: BEFORE / AFTER SMOTE
+# ==========================
+
+st.markdown('<div class="section-title">Class Distribution — Before SMOTE</div>', unsafe_allow_html=True)
+
+before_counts = pd.DataFrame({
+    "Class": ["No", "Yes"],
+    "Count": [int((y == 0).sum()), int((y == 1).sum())],
+})
+
+table_before_col, _ = st.columns([1, 2])
+with table_before_col:
+    st.dataframe(before_counts, use_container_width=True, hide_index=True)
+
+pie_col, cmp_col = st.columns(2)
+
+with pie_col:
+
+    chart_card_open("Churn Distribution")
+
+    fig_before, ax_before = plt.subplots(figsize=(5.0, 5.0), dpi=140)
+
+    _, _, before_autotexts = ax_before.pie(
+        before_counts["Count"],
+        labels=before_counts["Class"],
+        autopct="%1.1f%%",
+        startangle=90,
+        colors=[NAVY, GOLD],
+        wedgeprops={"linewidth": 2, "edgecolor": "white"},
+        textprops={"fontsize": 11.5, "color": SLATE},
+    )
+    for autotext in before_autotexts:
+        autotext.set_color("white")
+        autotext.set_fontweight("bold")
+    fig_before.tight_layout()
+
+    st.pyplot(fig_before, use_container_width=False)
+
+    chart_card_close()
+
+with cmp_col:
+
+    compare_candidates = ["InternetService", "PaymentMethod", "Contract"]
+    compare_col = next((c for c in compare_candidates if c in df.columns), None)
+
+    if compare_col is not None:
+
+        chart_card_open(f"{compare_col} vs Churn")
+
+        fig_cmp, ax_cmp = plt.subplots(figsize=(5.6, 5.0), dpi=140)
+
+        sns.countplot(
+            x=compare_col,
+            hue="Churn",
+            data=df,
+            ax=ax_cmp,
+            palette=[NAVY, GOLD],
+        )
+
+        ax_cmp.set_xlabel("")
+        ax_cmp.set_ylabel("Customers")
+        ax_cmp.tick_params(axis="x", rotation=15)
+        ax_cmp.legend(title="Churn", frameon=False)
+        fig_cmp.tight_layout()
+
+        st.pyplot(fig_cmp, use_container_width=True)
+
+    else:
+        chart_card_open("Feature Comparison")
+        st.caption("No comparable feature found in this dataset.")
+
+    chart_card_close()
+
+st.markdown('<div class="section-title">Class Distribution — After SMOTE</div>', unsafe_allow_html=True)
+
+after_counts = pd.DataFrame({
+    "Class": ["No", "Yes"],
+    "Count": [int((y_resampled == 0).sum()), int((y_resampled == 1).sum())],
+})
+
+table_after_col, _ = st.columns([1, 2])
+with table_after_col:
+    st.dataframe(after_counts, use_container_width=True, hide_index=True)
+
+chart_card_open("Balanced Class Distribution After SMOTE")
+
+fig_after, ax_after = plt.subplots(figsize=(11, 4.2), dpi=140)
+
+sns.barplot(
+    x="Class",
+    y="Count",
+    data=after_counts,
+    ax=ax_after,
+    palette=[NAVY, GOLD],
+)
+
+ax_after.set_xlabel("")
+ax_after.set_ylabel("Customers")
+for container in ax_after.containers:
+    ax_after.bar_label(container, fmt="%d", padding=3, fontsize=10, color=SLATE)
+fig_after.tight_layout()
+
+st.pyplot(fig_after, use_container_width=True)
+
+chart_card_close()
+
+# ==========================
 # TRAIN TEST SPLIT
 # ==========================
 
