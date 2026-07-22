@@ -390,64 +390,27 @@ table_before_col, _ = st.columns([1, 2])
 with table_before_col:
     st.dataframe(before_counts, use_container_width=True, hide_index=True)
 
-pie_col, cmp_col = st.columns(2)
+chart_card_open("Class Distribution Before SMOTE")
 
-with pie_col:
+fig_before, ax_before = plt.subplots(figsize=(11, 4.2), dpi=140)
 
-    chart_card_open("Churn Distribution")
+sns.barplot(
+    x="Class",
+    y="Count",
+    data=before_counts,
+    ax=ax_before,
+    palette=[NAVY, GOLD],
+)
 
-    fig_before, ax_before = plt.subplots(figsize=(5.0, 5.0), dpi=140)
+ax_before.set_xlabel("")
+ax_before.set_ylabel("Customers")
+for container in ax_before.containers:
+    ax_before.bar_label(container, fmt="%d", padding=3, fontsize=10, color=SLATE)
+fig_before.tight_layout()
 
-    _, _, before_autotexts = ax_before.pie(
-        before_counts["Count"],
-        labels=before_counts["Class"],
-        autopct="%1.1f%%",
-        startangle=90,
-        colors=[NAVY, GOLD],
-        wedgeprops={"linewidth": 2, "edgecolor": "white"},
-        textprops={"fontsize": 11.5, "color": SLATE},
-    )
-    for autotext in before_autotexts:
-        autotext.set_color("white")
-        autotext.set_fontweight("bold")
-    fig_before.tight_layout()
+st.pyplot(fig_before, use_container_width=True)
 
-    st.pyplot(fig_before, use_container_width=False)
-
-    chart_card_close()
-
-with cmp_col:
-
-    compare_candidates = ["InternetService", "PaymentMethod", "Contract"]
-    compare_col = next((c for c in compare_candidates if c in df.columns), None)
-
-    if compare_col is not None:
-
-        chart_card_open(f"{compare_col} vs Churn")
-
-        fig_cmp, ax_cmp = plt.subplots(figsize=(5.6, 5.0), dpi=140)
-
-        sns.countplot(
-            x=compare_col,
-            hue="Churn",
-            data=df,
-            ax=ax_cmp,
-            palette=[NAVY, GOLD],
-        )
-
-        ax_cmp.set_xlabel("")
-        ax_cmp.set_ylabel("Customers")
-        ax_cmp.tick_params(axis="x", rotation=15)
-        ax_cmp.legend(title="Churn", frameon=False)
-        fig_cmp.tight_layout()
-
-        st.pyplot(fig_cmp, use_container_width=True)
-
-    else:
-        chart_card_open("Feature Comparison")
-        st.caption("No comparable feature found in this dataset.")
-
-    chart_card_close()
+chart_card_close()
 
 st.markdown('<div class="section-title">Class Distribution — After SMOTE</div>', unsafe_allow_html=True)
 
