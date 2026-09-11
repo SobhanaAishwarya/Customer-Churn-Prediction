@@ -43,7 +43,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background: linear-gradient(180deg, #F2FBFA 0%, #F7FBFA 320px, #F7FBFA 100%);
+        background: linear-gradient(180deg, #CDF3EA 0%, #DFF6EF 220px, #EFFAF6 520px, #F5FBF9 100%);
         font-family: 'Inter', 'Segoe UI', sans-serif;
     }
     .block-container { padding-top: 4.5rem; padding-bottom: 3rem; max-width: 1220px; }
