@@ -5,6 +5,20 @@ churn. Upload customer data and get live KPIs, business-analytics charts,
 class-balancing with SMOTE, and a side-by-side comparison of three
 classification models — all rendered on the fly.
 
+## Screenshots
+
+| Dashboard overview |
+| --- |
+| ![Dashboard overview](screenshots/01-overview.png) |
+
+| Business analytics |
+| --- |
+| ![Business analytics](screenshots/02-business-analytics.png) |
+
+| SMOTE balancing, model comparison & confusion matrices |
+| --- |
+| ![Model comparison](screenshots/03-model-comparison.png) |
+
 ## Features
 
 - **CSV/Excel upload** — or falls back to the bundled `Telco_Customer_Churn.csv`
