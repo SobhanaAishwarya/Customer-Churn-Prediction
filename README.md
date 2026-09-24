@@ -91,3 +91,7 @@ a Yes/No churn label.
 - Add precision, recall and ROC-AUC alongside accuracy — they say more on imbalanced data
 - Try gradient-boosted models and cross-validated hyperparameter tuning
 - Explain individual predictions (e.g. feature importance or SHAP) so retention teams know *why* a customer is at risk
+
+---
+
+© 2026 Kantapalli Sobhana Aishwarya. All rights reserved. Shared for portfolio viewing; please ask before reusing.
