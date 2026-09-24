@@ -4,7 +4,6 @@ Predicts which telecom customers are likely to leave, and wraps the whole
 pipeline in a Streamlit dashboard — upload customer data, see the business
 picture, and compare three classifiers side by side.
 
-**[Live demo](https://customer-churn-prediction-7hwogoiapr8qrykx5tn4ed.streamlit.app/)** ·
 Python · Scikit-learn · imbalanced-learn · Streamlit
 
 > Built during my Data Science internship at Codec Technologies (May – June 2025).
